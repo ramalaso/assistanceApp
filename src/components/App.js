@@ -9,26 +9,33 @@ function App() {
     axios.get('http://localhost:3001/').then(response => {
       setmyAppointments(response.data.data);
     });
-  });
+  }, []);
+
+  function showAssistents() {
+    axios.get('http://localhost:3001/').then(response => {
+      setmyAppointments(response.data.data.filter(appointment => appointment.assistance));
+    });
+  }
+
+  function showNoAssistents() {
+    axios.get('http://localhost:3001/').then(response => {
+      setmyAppointments(response.data.data.filter(appointment => !appointment.assistance));
+    });
+  }
+
+  function showAll() {
+    axios.get('http://localhost:3001/').then(response => {
+      setmyAppointments(response.data.data);
+    });
+  }
 
 
   return (
     <>
       <h1>Lista de asistencia</h1>
-      {/* <ul className="list" id="list">
-        {
-          myAppointments.map(appointment => {
-            return (
-              <li key={appointment._id}>
-                <input type="checkbox" id="status" onChange={e => updateStatus(appointment._id)} />
-                <label className="label-for-check" htmlFor="idinput">
-                  {appointment.name}
-                </label>
-              </li>
-            );
-          })
-        }
-      </ul>; */}
+      <button onClick={showAssistents}>Lista de asistentes</button>
+      <button onClick={showNoAssistents}>Lista de no asistentes</button>
+      <button onClick={showAll}>Lista de todos</button>
       <ListAppointments appointments={myAppointments} />
     </>
   );
