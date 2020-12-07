@@ -1,9 +1,11 @@
 import React from 'react';
+import Appointment from './Appointment';
+import '../css/list.css';
 
 export default function ListAppointments({ appointments }) {
     return (
-        <div element>
-            {appointments.map(apt => <h1>{apt.petName}</h1>)}
-        </div>
+        <ul className="list" id="list">
+            {appointments.map(appointment => <Appointment appointment={appointment} />)}
+        </ul>
     );
 }

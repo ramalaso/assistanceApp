@@ -1,11 +1,7 @@
-import '../css/App.css';
-import React, { Component, useState, useEffect } from 'react';
-
-import AddAppointments from './AddAppointments';
-import ListAppointments from './ListAppointments';
-import SearchAppointments from './SearchAppointments';
+import '../css/list.css';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-// import data from './data.json';
+import ListAppointments from './ListAppointments';
 
 function App() {
   let [myAppointments, setmyAppointments] = useState([]);
@@ -14,22 +10,28 @@ function App() {
       setmyAppointments(response.data.data);
     });
   });
+
+
   return (
-    <main className="page bg-white" id="petratings">
-      <div className="container">
-        <div className="row">
-          <div className="col-md-12 bg-white">
-            <div className="container">
-              <AddAppointments />
-              <SearchAppointments />
-              <ListAppointments appointments={myAppointments} />
-              {myAppointments.map(member => <h1>{member.name}</h1>)}
-            </div>
-          </div>
-        </div>
-      </div>
-    </main>
+    <>
+      <h1>Lista de asistencia</h1>
+      {/* <ul className="list" id="list">
+        {
+          myAppointments.map(appointment => {
+            return (
+              <li key={appointment._id}>
+                <input type="checkbox" id="status" onChange={e => updateStatus(appointment._id)} />
+                <label className="label-for-check" htmlFor="idinput">
+                  {appointment.name}
+                </label>
+              </li>
+            );
+          })
+        }
+      </ul>; */}
+      <ListAppointments appointments={myAppointments} />
+    </>
   );
-}
+};
 
 export default App;
